@@ -10,16 +10,28 @@ public class LoadingScreen : MonoBehaviour
 
     public TMP_Text timer;
     private int i = 0;
-    private int endTimer = 1000;
+    private int counter = 50;
+    private int milliseconds = 0;
+    private int seconds = 15;
+    private int loadTime = 750;
 
     // Update is called once per frame
     void FixedUpdate() {
-
-        timer.text = "00:0" + ((endTimer - i)/100).ToString() + ":" + ((endTimer - i)).ToString();
-        i++;
-
-        if (i > 1000) {
+        if(counter == 50) {
+            seconds--;
+            counter = 0;
+            milliseconds = 60;
+        }
+        if (i > loadTime) {
+            timer.text = "00:00:00";
+            if (i > 850) {
             SceneManager.LoadScene("Interchange");
-        } 
+            }
+        } else {
+            timer.text = "00:0" + seconds.ToString() + ":" + milliseconds.ToString();
+        }
+        i++;
+        counter++;
+        milliseconds--;  
     }
 }
